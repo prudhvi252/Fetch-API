@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <title>API Task</title>
+
+<style>
+   body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background: #f7f7f7;
+  background-image: url(360_F_573116340_bwi5gHe7nf6eFOTvtS2VyqHcwsDSoOll.jpg);
+    background-size: cover;
+    background-position: center;
+   display: flex;
+   justify-content: center; 
+}
+    section {
+        width: 100%;
+        max-width: 1200px;
+    }
+h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  color:gold;
+    text-shadow: 4px 4px 4px rgba(12, 219, 26, 0.7);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  /* background: white; */
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: azure;
+}
+
+table th, table td {
+  border: 1px solid crimson;
+  padding: 10px;
+  text-align: left;
+  word-break: break-word;
+}
+
+table th {
+  background: red;
+  color: white;
+}
+
+ /* table tr:nth-child(even) {
+    background-color: aqua;
+
+ } */
+  /* 📱 Mobile devices (up to 576px) */
+@media (max-width: 576px){
+    body{
+        margin: 10px;
+        flex-direction: column;
+    }
+    table th, table td{
+        font-size: 12px;
+        padding: 6px;
+    }
+    h2{
+        font-size: 20px;
+    }
+}
+
+  /* 🧾 Tablets (577px to 768px) */
+@media (max-width: 577px) and (max-width: 768px){
+    table th, table td{
+        font-size: 14px;
+        padding: 8px;
+    }
+    h2{
+        font-size: 24px;
+    }
+}
+  /* 💻 Small desktops (769px to 992px) */
+@media (min-width: 769px) and (max-width: 992px){
+    table th, table td{
+        font-size: 16px;
+        padding: 9px;
+    }
+    h2{
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+<body>
+  <section>
+    <h2> Jokes</h2>
+    <table id="jokesTable">
+      <thead> 
+        <tr>
+          <th class="text-center">Type</th>
+          <th class="text-center">ID</th>
+          <th class="text-center">Setup</th>
+          <th class="text-center">Punchline</th>
+        </tr>
+        </thead>
+        <tbody>
+            <!-- Jokes will be inserted here -->
+        </tbody>
+    </table>
+  </section>
+
+<script>
+fetch("https://api.allorigins.win/raw?url=https://official-joke-api.appspot.com/jokes/ten")
+
+  .then(response => response.json())
+  .then(jokes => {
+    const tbody = document.querySelector("#jokesTable tbody");
+    jokes.forEach(joke => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${joke.type}</td>
+        <td>${joke.id}</td>
+        <td>${joke.setup}</td>
+        <td>${joke.punchline}</td>
+      `;
+      tbody.appendChild(row);
+    });
+  })
+  .catch(error => console.error("Error fetching jokes:", error));
+  const apiUrl = "https://api.allorigins.win/raw?url=https://official-joke-api.appspot.com/jokes/ten";
+</script>
+</body>
+</html>
